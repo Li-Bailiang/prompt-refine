@@ -25,8 +25,9 @@ chat input.
    examples, tool rules, and output format with short labels.
 3. **Preserve the intended output language.** When inputs mix languages, say the
    answer language explicitly and keep code, identifiers, and API names intact.
-4. **Delimit long context.** Put source documents in clear blocks and ask for
-   targeted extraction, comparison, or synthesis rather than broad analysis.
+4. **Delimit long context and put the task near the end.** Place long source
+   documents in clear blocks, then restate the exact task after the source so it
+   stays closest to the model's response.
 5. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
