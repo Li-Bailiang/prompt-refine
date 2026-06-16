@@ -1,7 +1,7 @@
 # MiniMax M-series Prompt Strategy
 
 > You are running as **a MiniMax M-series model, especially MiniMax-M3**. Restructure your own input using these principles.
-> Source: [M-series Usage Tips](https://platform.minimax.io/docs/token-plan/prompting-best-practices) · [Model Invocation](https://platform.minimax.io/docs/guides/text-generation) · [Tool Use & Interleaved Thinking](https://platform.minimax.io/docs/guides/text-m3-function-call) · [Prompt Caching](https://platform.minimax.io/docs/api-reference/text-prompt-caching) · [Model releases](https://platform.minimax.io/docs/release-notes/models)
+> Source: [M-series Usage Tips](https://platform.minimax.io/docs/token-plan/prompting-best-practices) | [Model Invocation](https://platform.minimax.io/docs/guides/text-generation) | [Tool Use & Interleaved Thinking](https://platform.minimax.io/docs/guides/text-m3-function-call) | [Prompt Caching](https://platform.minimax.io/docs/api-reference/text-prompt-caching) | [Model releases](https://platform.minimax.io/docs/release-notes/models)
 
 ## What is distinctive for MiniMax
 
