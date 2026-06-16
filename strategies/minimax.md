@@ -21,33 +21,36 @@ chat input.
 
 1. **Name the task and success contract.** State what to build, decide, extract,
    or verify, plus the constraints and output shape that make the answer usable.
-2. **Use clear sections.** Separate task, context, source material, constraints,
+2. **Explain why important constraints exist.** Add short context for formatting,
+   safety, accessibility, audience, or workflow constraints when literal
+   compliance could miss the real use case.
+3. **Use clear sections.** Separate task, context, source material, constraints,
    examples, tool rules, and output format with short labels.
-3. **Preserve the intended output language.** When inputs mix languages, say the
+4. **Preserve the intended output language.** When inputs mix languages, say the
    answer language explicitly and keep code, identifiers, and API names intact.
-4. **Make role and format verifiable.** If a role is useful, define its
+5. **Make role and format verifiable.** If a role is useful, define its
    expertise, scope, and decision criteria; define output sections, fields, and
    length limits that can be checked.
-5. **Delimit long context and put the task near the end.** Place long source
+6. **Delimit long context and put the task near the end.** Place long source
    documents in clear blocks, then restate the exact task after the source so it
    stays closest to the model's response.
-6. **Ask for extraction before synthesis.** For very large inputs, require the
+7. **Ask for extraction before synthesis.** For very large inputs, require the
    model to quote, list, or summarize the relevant parts first, then answer from
    that grounded subset.
-7. **Define tool-use triggers.** For agentic workflows, state when tools should
+8. **Define tool-use triggers.** For agentic workflows, state when tools should
    be used, when they should not be used, what each call must accomplish, and
    how tool results should be combined into the final answer.
-8. **Preserve interleaved-thinking history in API workflows.** When the refined
+9. **Preserve interleaved-thinking history in API workflows.** When the refined
    prompt is for a MiniMax-M3 tool loop, tell the caller to append the complete
    assistant response, including tool calls and thinking/reasoning fields, to
    the next turn's message history.
-9. **Arrange repeated context for prompt caching.** Put stable tool lists,
+10. **Arrange repeated context for prompt caching.** Put stable tool lists,
    system instructions, reusable corpora, and repeated history before dynamic
    per-turn user details so MiniMax's prefix-based cache can be effective.
-10. **Bind multimodal inputs to inspection tasks.** For image or video content
+11. **Bind multimodal inputs to inspection tasks.** For image or video content
    parts, state what to inspect, compare, extract, or verify for each attachment
    instead of merely attaching media and asking for a general summary.
-11. **Make examples concrete and diverse.** For classification, extraction,
+12. **Make examples concrete and diverse.** For classification, extraction,
    style, or edge-case handling, include 3-5 compact examples that mirror the
    real inputs and cover at least one ambiguous or failure case.
 
