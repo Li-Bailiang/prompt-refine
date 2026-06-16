@@ -25,26 +25,29 @@ chat input.
    examples, tool rules, and output format with short labels.
 3. **Preserve the intended output language.** When inputs mix languages, say the
    answer language explicitly and keep code, identifiers, and API names intact.
-4. **Delimit long context and put the task near the end.** Place long source
+4. **Make role and format verifiable.** If a role is useful, define its
+   expertise, scope, and decision criteria; define output sections, fields, and
+   length limits that can be checked.
+5. **Delimit long context and put the task near the end.** Place long source
    documents in clear blocks, then restate the exact task after the source so it
    stays closest to the model's response.
-5. **Ask for extraction before synthesis.** For very large inputs, require the
+6. **Ask for extraction before synthesis.** For very large inputs, require the
    model to quote, list, or summarize the relevant parts first, then answer from
    that grounded subset.
-6. **Define tool-use triggers.** For agentic workflows, state when tools should
+7. **Define tool-use triggers.** For agentic workflows, state when tools should
    be used, when they should not be used, what each call must accomplish, and
    how tool results should be combined into the final answer.
-7. **Preserve interleaved-thinking history in API workflows.** When the refined
+8. **Preserve interleaved-thinking history in API workflows.** When the refined
    prompt is for a MiniMax-M3 tool loop, tell the caller to append the complete
    assistant response, including tool calls and thinking/reasoning fields, to
    the next turn's message history.
-8. **Arrange repeated context for prompt caching.** Put stable tool lists,
+9. **Arrange repeated context for prompt caching.** Put stable tool lists,
    system instructions, reusable corpora, and repeated history before dynamic
    per-turn user details so MiniMax's prefix-based cache can be effective.
-9. **Bind multimodal inputs to inspection tasks.** For image or video content
+10. **Bind multimodal inputs to inspection tasks.** For image or video content
    parts, state what to inspect, compare, extract, or verify for each attachment
    instead of merely attaching media and asking for a general summary.
-10. **Make examples concrete.** For classification, extraction, style, or edge
+11. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
 ## Anti-patterns to avoid
