@@ -156,7 +156,7 @@ user's **original language is always preserved**.
 
 ---
 
-## 9. Host model: Z.ai GLM — long-horizon coding agent boundaries
+## 9. Host model: Z.ai GLM - long-horizon coding agent boundaries
 
 **Before**
 > build a crawler and dashboard for these supplier pages
@@ -182,6 +182,35 @@ user's **original language is always preserved**.
 
 ---
 
-> These are illustrative. In normal (non-verbose) mode the user never sees the "after" —
+## 10. Host model: MiniMax M3 - long-context agent with cache-aware layout
+
+**Before**
+> review this huge support export and tell me what we should fix
+
+**After** (`strategies/minimax.md`)
+> Stable context for cache reuse:
+> - Product: B2B analytics dashboard
+> - Review goal: find support issues that can reduce enterprise renewal risk
+> - Output language: English
+>
+> Source:
+> ```text
+> [support ticket export]
+> ```
+>
+> Task: first extract the 10 most relevant ticket clusters with short evidence
+> quotes. Then synthesize the top fixes.
+>
+> Tool policy: use tools only if ticket metadata is missing or inconsistent.
+> Do not invent customer facts; mark unknown fields as `null`.
+>
+> Output format:
+> 1. Priority fixes - table with Area, Evidence, Fix, Owner, Risk
+> 2. Open questions - bullets, only where source evidence is insufficient
+> 3. Verification notes - what was checked and what remains uncertain
+
+---
+
+> These are illustrative. In normal (non-verbose) mode the user never sees the "after" -
 > the model answers the refined version directly. Run `/refine verbose` to see the diff
 > for your own prompts.
