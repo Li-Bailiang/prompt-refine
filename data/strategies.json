@@ -99,6 +99,15 @@
     "sourceZh": "Z.ai GLM official docs"
   },
   {
+    "id": "minimax",
+    "file": "strategies/minimax.md",
+    "skillLabel": "MiniMax M-series",
+    "readmeLabelEn": "MiniMax M-series",
+    "readmeLabelZh": "MiniMax M-series",
+    "sourceEn": "MiniMax official docs",
+    "sourceZh": "MiniMax official docs"
+  },
+  {
     "id": "cohere",
     "file": "strategies/cohere.md",
     "skillLabel": "Command R / R+ (Cohere)",

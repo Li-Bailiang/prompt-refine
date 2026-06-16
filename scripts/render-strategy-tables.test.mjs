@@ -60,3 +60,12 @@ test('strategy manifest includes Z.ai GLM as an official model family', () => {
   assert.equal(glm.file, 'strategies/zai-glm.md');
   assert.match(glm.sourceEn, /Z\.ai|GLM/i);
 });
+
+test('strategy manifest includes MiniMax as an official model family', () => {
+  const manifest = loadManifest();
+  const minimax = manifest.find((entry) => entry.id === 'minimax');
+
+  assert.ok(minimax);
+  assert.equal(minimax.file, 'strategies/minimax.md');
+  assert.match(minimax.sourceEn, /MiniMax/i);
+});
