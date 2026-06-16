@@ -65,3 +65,5 @@ chat input.
   API history, which breaks interleaved-thinking continuity
 - Placing changing user details before stable tool lists, system prompts, or
   reusable corpora, which defeats prefix-based prompt caching
+- Attaching images or videos to MiniMax-M3 without naming the inspection,
+  comparison, extraction, or verification task for each media item
