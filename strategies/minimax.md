@@ -47,8 +47,9 @@ chat input.
 10. **Bind multimodal inputs to inspection tasks.** For image or video content
    parts, state what to inspect, compare, extract, or verify for each attachment
    instead of merely attaching media and asking for a general summary.
-11. **Make examples concrete.** For classification, extraction, style, or edge
-   cases, include compact examples that match the real task.
+11. **Make examples concrete and diverse.** For classification, extraction,
+   style, or edge-case handling, include 3-5 compact examples that mirror the
+   real inputs and cover at least one ambiguous or failure case.
 
 ## Anti-patterns to avoid
 
