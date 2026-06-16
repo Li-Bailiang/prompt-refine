@@ -63,3 +63,5 @@ chat input.
 - Treating tool use or cache behavior as if it were only prompt prose
 - Dropping MiniMax-M3 thinking, reasoning details, or tool calls from multi-turn
   API history, which breaks interleaved-thinking continuity
+- Placing changing user details before stable tool lists, system prompts, or
+  reusable corpora, which defeats prefix-based prompt caching
