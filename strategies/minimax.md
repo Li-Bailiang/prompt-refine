@@ -61,3 +61,5 @@ chat input.
 - Asking for long-context analysis without saying what to extract or ignore
 - Letting mixed-language input decide the output language by accident
 - Treating tool use or cache behavior as if it were only prompt prose
+- Dropping MiniMax-M3 thinking, reasoning details, or tool calls from multi-turn
+  API history, which breaks interleaved-thinking continuity
