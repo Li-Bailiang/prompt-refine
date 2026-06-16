@@ -31,7 +31,10 @@ chat input.
 5. **Ask for extraction before synthesis.** For very large inputs, require the
    model to quote, list, or summarize the relevant parts first, then answer from
    that grounded subset.
-6. **Make examples concrete.** For classification, extraction, style, or edge
+6. **Define tool-use triggers.** For agentic workflows, state when tools should
+   be used, when they should not be used, what each call must accomplish, and
+   how tool results should be combined into the final answer.
+7. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
 ## Anti-patterns to avoid
