@@ -38,7 +38,10 @@ chat input.
    prompt is for a MiniMax-M3 tool loop, tell the caller to append the complete
    assistant response, including tool calls and thinking/reasoning fields, to
    the next turn's message history.
-8. **Make examples concrete.** For classification, extraction, style, or edge
+8. **Arrange repeated context for prompt caching.** Put stable tool lists,
+   system instructions, reusable corpora, and repeated history before dynamic
+   per-turn user details so MiniMax's prefix-based cache can be effective.
+9. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
 ## Anti-patterns to avoid
