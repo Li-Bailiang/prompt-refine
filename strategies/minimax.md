@@ -41,7 +41,10 @@ chat input.
 8. **Arrange repeated context for prompt caching.** Put stable tool lists,
    system instructions, reusable corpora, and repeated history before dynamic
    per-turn user details so MiniMax's prefix-based cache can be effective.
-9. **Make examples concrete.** For classification, extraction, style, or edge
+9. **Bind multimodal inputs to inspection tasks.** For image or video content
+   parts, state what to inspect, compare, extract, or verify for each attachment
+   instead of merely attaching media and asking for a general summary.
+10. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
 ## Anti-patterns to avoid
