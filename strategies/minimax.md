@@ -28,7 +28,10 @@ chat input.
 4. **Delimit long context and put the task near the end.** Place long source
    documents in clear blocks, then restate the exact task after the source so it
    stays closest to the model's response.
-5. **Make examples concrete.** For classification, extraction, style, or edge
+5. **Ask for extraction before synthesis.** For very large inputs, require the
+   model to quote, list, or summarize the relevant parts first, then answer from
+   that grounded subset.
+6. **Make examples concrete.** For classification, extraction, style, or edge
    cases, include compact examples that match the real task.
 
 ## Anti-patterns to avoid
