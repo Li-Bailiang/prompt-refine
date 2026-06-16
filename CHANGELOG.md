@@ -13,6 +13,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   on Chinese-first prompting, long-context extraction, delimited references, tool intent,
   and compact structured outputs.
 - **Kimi before/after example** showing Chinese contract-risk extraction over long context.
+- **MiniMax M-series strategy** grounded in official MiniMax M-series guidance, focused on
+  MiniMax-M3, long-context task placement, interleaved-thinking tool loops, prompt caching,
+  multimodal task binding, language control, and verifiable output contracts.
+- **MiniMax before/after example** showing cache-aware long-context support analysis with
+  extraction before synthesis and explicit tool policy.
 - **Z.ai GLM strategy** grounded in official GLM capability docs, focused on thinking mode,
   long-horizon tasks, function calling, structured output, context caching, streaming, and
   GLM-5V multimodal task binding.
