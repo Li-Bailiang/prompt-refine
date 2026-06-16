@@ -11,6 +11,12 @@ tasks, explicit constraints, examples for difficult patterns, clear sections,
 language control, source delimiters, and API-aware handling for interleaved
 thinking and prompt caching.
 
+MiniMax's own model invocation docs make the Anthropic-compatible API the
+recommended path for MiniMax-M3 because it exposes thinking blocks and
+interleaved thinking. The OpenAI-compatible API is still useful for existing
+clients, and it supports text, image, and video content parts for multimodal
+chat input.
+
 ## Restructuring rules
 
 1. **Name the task and success contract.** State what to build, decide, extract,
