@@ -11,6 +11,10 @@ mode, document inputs, and deployable enterprise variants. Its official guidance
 favors concise prompts, clear section boundaries, system messages, explicit
 formats, tested examples, and meaningful labels.
 
+The current Jamba family includes `jamba-large` and `jamba-mini` API endpoints
+with 256K context windows. AI21 advises dated versions to avoid breaking changes,
+and lists text as the input modality with official support for nine languages.
+
 ## Restructuring rules
 
 1. **State the instruction first.** Say exactly what Jamba should do and what a
