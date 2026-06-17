@@ -36,6 +36,9 @@ and lists text as the input modality with official support for nine languages.
 9. **Match sampling to the job.** Use low or zero temperature for classification,
    extraction, and debugging; specify length in the prompt and keep `max_tokens`
    as a failsafe rather than the main length instruction.
+10. **Use functions for external actions.** For live data, calculations, or APIs,
+   define function tools with JSON schemas and require tool results to be returned
+   into the conversation before the final answer.
 
 ## Anti-patterns to avoid
 
