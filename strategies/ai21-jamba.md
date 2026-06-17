@@ -33,6 +33,9 @@ and lists text as the input modality with official support for nine languages.
    fallback such as "I don't know" or `null`.
 8. **Request structured output explicitly.** For machine-read outputs, name the
    JSON fields and use API JSON mode when available.
+9. **Match sampling to the job.** Use low or zero temperature for classification,
+   extraction, and debugging; specify length in the prompt and keep `max_tokens`
+   as a failsafe rather than the main length instruction.
 
 ## Anti-patterns to avoid
 
