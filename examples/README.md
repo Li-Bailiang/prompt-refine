@@ -211,6 +211,30 @@ user's **original language is always preserved**.
 
 ---
 
+## 11. Host model: AI21 Jamba - IDH, bounded data, JSON contract
+
+**Before**
+> classify these refund messages and put them in a spreadsheet-friendly format
+
+**After** (`strategies/ai21-jamba.md`)
+> System: You are a precise customer-support operations analyst.
+>
+> Instruction: classify each message as `Refund eligible`, `Needs review`, or
+> `Not eligible`. If the message lacks enough evidence, use `Needs review`.
+>
+> Data:
+> ```text
+> [refund messages]
+> ```
+> - End of messages -
+>
+> Hint: return spreadsheet-ready JSON only.
+>
+> Output JSON fields:
+> `{ "message_id": "", "label": "", "reason": "", "missing_evidence": "" }`
+
+---
+
 > These are illustrative. In normal (non-verbose) mode the user never sees the "after" -
 > the model answers the refined version directly. Run `/refine verbose` to see the diff
 > for your own prompts.
