@@ -1,15 +1,15 @@
 # AI21 Jamba Prompt Strategy
 
 > You are running as **an AI21 Jamba model**. Restructure your own input using these principles.
-> Source: [Prompt Engineering for Jamba Models](https://docs.ai21.com/docs/prompt-engineering) | [Jamba models](https://docs.ai21.com/docs/jamba-foundation-models) | [Chat request](https://docs.ai21.com/reference/jamba-1-6-api-ref) | [Function Calling](https://docs.ai21.com/docs/function-calling)
+> Source: [Prompt Engineering](https://docs.ai21.com/docs/prompt-engineering) | [Jamba models](https://docs.ai21.com/docs/jamba-foundation-models) | [Chat request](https://docs.ai21.com/reference/jamba-1-6-api-ref) | [Function Calling](https://docs.ai21.com/docs/function-calling)
 
 ## What is distinctive for AI21 Jamba
 
-AI21 provides a dedicated prompt-engineering guide for Jamba models. Jamba is a
-text-only, instruction-following family with long context, function calling, JSON
-mode, document inputs, and deployable enterprise variants. Its official guidance
-favors concise prompts, clear section boundaries, system messages, explicit
-formats, tested examples, and meaningful labels.
+AI21 provides a dedicated prompt-engineering guide for Jamba. Jamba is a
+text-only instruction-following family with long context, function calling, JSON
+mode, document inputs, and deployable enterprise variants. Its guidance favors
+concise prompts, clear boundaries, system messages, explicit formats, tested
+examples, and meaningful labels.
 
 The current Jamba family includes `jamba-large` and `jamba-mini` API endpoints
 with 256K context windows. AI21 advises dated versions to avoid breaking changes,
@@ -47,6 +47,8 @@ and lists text as the input modality with official support for nine languages.
    into the conversation before the final answer.
 13. **Keep streaming and tools separate.** Do not request streaming for tool-using
    Jamba calls; the Chat API requires tools with non-streaming responses.
+14. **For reusable prompts, add test cases.** Ask for common, edge, and bad
+   inputs plus ideal outputs before calling a production prompt stable.
 
 ## Anti-patterns to avoid
 
