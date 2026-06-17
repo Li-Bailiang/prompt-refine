@@ -7,9 +7,8 @@
 
 AI21 provides a dedicated prompt-engineering guide for Jamba. Jamba is a
 text-only instruction-following family with long context, function calling, JSON
-mode, document inputs, and deployable enterprise variants. Its guidance favors
-concise prompts, clear boundaries, system messages, explicit formats, tested
-examples, and meaningful labels.
+mode, document inputs, and enterprise deployment. Its guidance favors concise
+prompts, clear boundaries, system messages, explicit formats, tests, and labels.
 
 The current Jamba family includes `jamba-large` and `jamba-mini` API endpoints
 with 256K context windows. AI21 advises dated versions to avoid breaking changes,
@@ -48,12 +47,12 @@ and lists text as the input modality with official support for nine languages.
 13. **Keep streaming and tools separate.** Do not request streaming for tool-use
    Jamba calls; the Chat API requires tools with non-streaming responses.
 14. **For reusable prompts, add test cases.** Ask for common, edge, and bad
-   inputs plus ideal outputs before calling a production prompt done.
+   inputs plus ideal outputs before calling production prompts done.
 
 ## Anti-patterns to avoid
 
 - Overlong prompts or long "do not" lists instead of positive target behavior
 - One blob mixing task, source data, examples, and output schema
-- Asking for factual certainty when the source data may not contain the answer
+- Asking for certainty or reliable citations without provided/retrieved sources
 - Using arbitrary numerical scores where meaningful labels would be clearer
 - Asking Jamba to do math or tool work better handled by code or functions
