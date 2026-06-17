@@ -39,6 +39,8 @@ and lists text as the input modality with official support for nine languages.
 10. **Use functions for external actions.** For live data, calculations, or APIs,
    define function tools with JSON schemas and require tool results to be returned
    into the conversation before the final answer.
+11. **Keep streaming and tools separate.** Do not request streaming for tool-using
+   Jamba calls; the Chat API requires tools with non-streaming responses.
 
 ## Anti-patterns to avoid
 
