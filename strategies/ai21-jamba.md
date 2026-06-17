@@ -27,19 +27,22 @@ and lists text as the input modality with official support for nine languages.
    then a short Hint that paraphrases the requested output.
 5. **Mark data boundaries.** For large or multiple inputs, label where each
    source starts and ends before asking Jamba to rewrite, extract, or compare.
-6. **Set a system role when useful.** Use a system message for persona,
+6. **Use document metadata when available.** For document-grounded tasks, keep
+   source content and metadata such as author, date, or URL attached to the
+   relevant document input.
+7. **Set a system role when useful.** Use a system message for persona,
    expertise, perspective, and response style.
-7. **Allow uncertainty.** If the answer must come from provided data, state the
+8. **Allow uncertainty.** If the answer must come from provided data, state the
    fallback such as "I don't know" or `null`.
-8. **Request structured output explicitly.** For machine-read outputs, name the
+9. **Request structured output explicitly.** For machine-read outputs, name the
    JSON fields and use API JSON mode when available.
-9. **Match sampling to the job.** Use low or zero temperature for classification,
+10. **Match sampling to the job.** Use low or zero temperature for classification,
    extraction, and debugging; specify length in the prompt and keep `max_tokens`
    as a failsafe rather than the main length instruction.
-10. **Use functions for external actions.** For live data, calculations, or APIs,
+11. **Use functions for external actions.** For live data, calculations, or APIs,
    define function tools with JSON schemas and require tool results to be returned
    into the conversation before the final answer.
-11. **Keep streaming and tools separate.** Do not request streaming for tool-using
+12. **Keep streaming and tools separate.** Do not request streaming for tool-using
    Jamba calls; the Chat API requires tools with non-streaming responses.
 
 ## Anti-patterns to avoid
