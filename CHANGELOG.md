@@ -18,6 +18,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   multimodal task binding, language control, and verifiable output contracts.
 - **MiniMax before/after example** showing cache-aware long-context support analysis with
   extraction before synthesis and explicit tool policy.
+- **AI21 Jamba strategy** grounded in official AI21 Jamba prompt/API docs, focused on
+  concise IDH prompting, data boundaries, system roles, JSON mode, function calling,
+  sampling controls, document metadata, and classification labels.
+- **AI21 Jamba before/after example** showing bounded data, meaningful labels, and a
+  spreadsheet-ready JSON contract.
 - **Z.ai GLM strategy** grounded in official GLM capability docs, focused on thinking mode,
   long-horizon tasks, function calling, structured output, context caching, streaming, and
   GLM-5V multimodal task binding.
