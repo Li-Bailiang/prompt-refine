@@ -23,11 +23,13 @@ and lists text as the input modality with official support for nine languages.
    tools, and output format with visible labels.
 3. **Use the IDH shape for complex prompts.** Put Instruction first, then Data,
    then a short Hint that paraphrases the requested output.
-4. **Set a system role when useful.** Use a system message for persona,
+4. **Mark data boundaries.** For large or multiple inputs, label where each
+   source starts and ends before asking Jamba to rewrite, extract, or compare.
+5. **Set a system role when useful.** Use a system message for persona,
    expertise, perspective, and response style.
-5. **Allow uncertainty.** If the answer must come from provided data, state the
+6. **Allow uncertainty.** If the answer must come from provided data, state the
    fallback such as "I don't know" or `null`.
-6. **Request structured output explicitly.** For machine-read outputs, name the
+7. **Request structured output explicitly.** For machine-read outputs, name the
    JSON fields and use API JSON mode when available.
 
 ## Anti-patterns to avoid
