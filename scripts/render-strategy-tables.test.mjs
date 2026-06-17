@@ -78,3 +78,11 @@ test('strategy manifest includes AI21 Jamba as an official model family', () => 
   assert.equal(ai21.file, 'strategies/ai21-jamba.md');
   assert.match(ai21.sourceEn, /AI21|Jamba/i);
 });
+
+test('AI21 Jamba strategy preserves current endpoint and JSON-mode guidance', () => {
+  const text = read('strategies/ai21-jamba.md');
+
+  assert.match(text, /jamba-large/);
+  assert.match(text, /jamba-mini/);
+  assert.match(text, /JSON mode/i);
+});
