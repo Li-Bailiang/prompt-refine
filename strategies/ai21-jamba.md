@@ -45,14 +45,14 @@ and lists text as the input modality with official support for nine languages.
 12. **Use functions for external actions.** For live data, calculations, or APIs,
    define function tools with JSON schemas and require tool results to be returned
    into the conversation before the final answer.
-13. **Keep streaming and tools separate.** Do not request streaming for tool-using
+13. **Keep streaming and tools separate.** Do not request streaming for tool-use
    Jamba calls; the Chat API requires tools with non-streaming responses.
 14. **For reusable prompts, add test cases.** Ask for common, edge, and bad
-   inputs plus ideal outputs before calling a production prompt stable.
+   inputs plus ideal outputs before calling a production prompt done.
 
 ## Anti-patterns to avoid
 
-- Overlong prompts that restate obvious constraints
+- Overlong prompts or long "do not" lists instead of positive target behavior
 - One blob mixing task, source data, examples, and output schema
 - Asking for factual certainty when the source data may not contain the answer
 - Using arbitrary numerical scores where meaningful labels would be clearer
