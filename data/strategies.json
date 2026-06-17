@@ -108,6 +108,15 @@
     "sourceZh": "MiniMax official docs"
   },
   {
+    "id": "ai21-jamba",
+    "file": "strategies/ai21-jamba.md",
+    "skillLabel": "AI21 Jamba",
+    "readmeLabelEn": "AI21 Jamba",
+    "readmeLabelZh": "AI21 Jamba",
+    "sourceEn": "AI21 Jamba official docs",
+    "sourceZh": "AI21 Jamba official docs"
+  },
+  {
     "id": "cohere",
     "file": "strategies/cohere.md",
     "skillLabel": "Command R / R+ (Cohere)",

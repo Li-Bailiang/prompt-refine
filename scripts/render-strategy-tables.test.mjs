@@ -69,3 +69,12 @@ test('strategy manifest includes MiniMax as an official model family', () => {
   assert.equal(minimax.file, 'strategies/minimax.md');
   assert.match(minimax.sourceEn, /MiniMax/i);
 });
+
+test('strategy manifest includes AI21 Jamba as an official model family', () => {
+  const manifest = loadManifest();
+  const ai21 = manifest.find((entry) => entry.id === 'ai21-jamba');
+
+  assert.ok(ai21);
+  assert.equal(ai21.file, 'strategies/ai21-jamba.md');
+  assert.match(ai21.sourceEn, /AI21|Jamba/i);
+});

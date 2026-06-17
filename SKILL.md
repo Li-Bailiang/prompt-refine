@@ -41,6 +41,7 @@ answer (unless verbose mode is on).
 | Kimi (Moonshot AI) | `strategies/kimi.md` |
 | GLM (Z.ai) | `strategies/zai-glm.md` |
 | MiniMax M-series | `strategies/minimax.md` |
+| AI21 Jamba | `strategies/ai21-jamba.md` |
 | Command R / R+ (Cohere) | `strategies/cohere.md` |
 | Nova (Amazon) | `strategies/amazon-nova.md` |
 | Phi (Microsoft) | `strategies/microsoft-phi.md` |

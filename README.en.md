@@ -244,6 +244,7 @@ Most tools also accept the shared `.agents/skills/` convention. User-level paths
 | Kimi / Moonshot AI | `strategies/kimi.md` | Kimi prompt best practices |
 | Z.ai GLM | `strategies/zai-glm.md` | Z.ai GLM official docs |
 | MiniMax M-series | `strategies/minimax.md` | MiniMax official docs |
+| AI21 Jamba | `strategies/ai21-jamba.md` | AI21 Jamba official docs |
 | Cohere Command | `strategies/cohere.md` | Cohere docs |
 | Amazon Nova | `strategies/amazon-nova.md` | Nova prompt guide |
 | Microsoft Phi | `strategies/microsoft-phi.md` | Phi Cookbook |
