@@ -36,13 +36,16 @@ and lists text as the input modality with official support for nine languages.
    fallback such as "I don't know" or `null`.
 9. **Request structured output explicitly.** For machine-read outputs, name the
    JSON fields and use API JSON mode when available.
-10. **Match sampling to the job.** Use low or zero temperature for classification,
+10. **Use meaningful labels for classification.** Prefer labels such as
+   `Consistent`, `Partially Consistent`, and `Inconsistent` over arbitrary
+   numeric scores.
+11. **Match sampling to the job.** Use low or zero temperature for classification,
    extraction, and debugging; specify length in the prompt and keep `max_tokens`
    as a failsafe rather than the main length instruction.
-11. **Use functions for external actions.** For live data, calculations, or APIs,
+12. **Use functions for external actions.** For live data, calculations, or APIs,
    define function tools with JSON schemas and require tool results to be returned
    into the conversation before the final answer.
-12. **Keep streaming and tools separate.** Do not request streaming for tool-using
+13. **Keep streaming and tools separate.** Do not request streaming for tool-using
    Jamba calls; the Chat API requires tools with non-streaming responses.
 
 ## Anti-patterns to avoid
