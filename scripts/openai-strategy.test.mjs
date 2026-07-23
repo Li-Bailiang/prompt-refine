@@ -34,7 +34,7 @@ test('OpenAI strategy conditionally applies current GPT-5.6 guidance', () => {
 
   assert.match(strategy, /^# OpenAI GPT Prompt Strategy \(GPT-5\.6 guidance\)$/m);
   assert.match(normalized, /OpenAI GPT-family model/);
-  assert.match(normalized, /Preserve the runtime's actual model identity/);
+  assert.match(normalized, /Preserve the host's actual identity/);
   assert.match(normalized, /only when the host identifies itself as GPT-5\.6/i);
   assert.match(strategy, /gpt-5\.6-sol/);
   assert.match(strategy, /gpt-5\.6-terra/);
@@ -169,6 +169,16 @@ test('OpenAI strategy makes long Codex work phase-aware and verifiable', () => {
   assert.match(strategy, /request a plan only when the approach matters/i);
 });
 
+test('OpenAI vision detail guidance is conditional on surface support', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(
+    strategy,
+    /if the surface exposes detail controls.{0,100}choose `?original`?.{0,100}dense text or spatially sensitive work/i,
+  );
+  assert.match(strategy, /account for token cost and latency/i);
+});
+
 test('OpenAI anti-patterns reject behavior regressions and capability assumptions', () => {
   const antiPatterns = normalizeMarkdown(
     read('strategies/openai.md').split('## Anti-patterns to avoid')[1] ?? '',
@@ -178,8 +188,9 @@ test('OpenAI anti-patterns reject behavior regressions and capability assumption
   assert.match(antiPatterns, /"be concise".{0,80}"be thorough".{0,80}"think step by step"/i);
   assert.match(antiPatterns, /ask-first loops.{0,100}authorized local work/i);
   assert.match(antiPatterns, /repeating a failing tool route/i);
-  assert.match(
-    antiPatterns,
-    /Pro mode, Programmatic Tool Calling, persisted reasoning, explicit caching, or multi-agent.{0,80}every surface/i,
-  );
+  assert.match(antiPatterns, /optional API modes/i);
+  for (const capability of ['Pro', 'PTC', 'persisted reasoning', 'explicit caching', 'multi-agent']) {
+    assert.match(antiPatterns, new RegExp(capability, 'i'));
+  }
+  assert.match(antiPatterns, /every surface/i);
 });
