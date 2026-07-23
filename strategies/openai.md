@@ -33,8 +33,9 @@ surface's reasoning-effort control when available.
    **`AGENTS.md`**, not in every prompt.
 6. **Grounding**: never fabricate citations, URLs, or IDs; separate confident facts from
    uncertainty; don't turn missing evidence into a confident "no".
-7. **Don't over-format.** Plain prose unless structure genuinely aids comprehension — avoid
-   reflexive cards and nested bullets.
+7. **Route tools.** Resolve prerequisites; parallelize independent reads and sequence
+   dependent calls. For empty or partial results, try a bounded fallback; report the
+   gap. Expose only relevant tools.
 8. **Multimodal (vision)**: say exactly what to do with each image and keep the question with
    it; raise image detail for small or low-quality text. Don't rely on the model for
    **precise spatial layout or exact counts** (documented weak spots).

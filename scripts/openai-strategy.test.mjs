@@ -102,3 +102,11 @@ test('OpenAI strategy defines request-level authorization boundaries', () => {
   assert.match(strategy, /non-destructive validation/i);
   assert.match(strategy, /confirmation.{0,100}external, destructive, costly, or scope-expanding/i);
 });
+
+test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /prerequisites.{0,100}parallelize independent.{0,100}sequence dependent/i);
+  assert.match(strategy, /empty or partial results.{0,100}bounded fallback/i);
+  assert.match(strategy, /expose only relevant tools/i);
+});
