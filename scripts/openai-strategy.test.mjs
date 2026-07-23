@@ -113,9 +113,16 @@ test('OpenAI strategy defines request-level authorization boundaries', () => {
 
 test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
   const strategy = normalizeMarkdown(read('strategies/openai.md'));
+  const executableFallback =
+    /empty or partial results.{0,120}task-level retry or fallback limit.{0,80}stop condition/i;
 
   assert.match(strategy, /prerequisites.{0,100}parallelize independent.{0,100}sequence dependent/i);
-  assert.match(strategy, /empty or partial results.{0,100}bounded fallback/i);
+  assert.match(strategy, executableFallback);
+  assert.doesNotMatch(
+    'For empty or partial results, try a bounded fallback and continue.',
+    executableFallback,
+  );
+  assert.match(strategy, /report the gap when exhausted/i);
   assert.match(strategy, /expose only relevant tools/i);
 });
 

@@ -2,7 +2,7 @@
 
 > You are running as **an OpenAI GPT-family model**. Preserve the runtime's actual model
 > identity; apply GPT-5.6-specific guidance only when the host identifies itself as GPT-5.6.
-> Source: [GPT-5.6 prompting](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) · [Model guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6) · [ChatGPT/Codex prompting](https://learn.chatgpt.com/docs/prompting) · [Images and vision](https://developers.openai.com/api/docs/guides/images-vision)
+> Source: [Prompting](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) · [Models](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6) · [ChatGPT/Codex](https://learn.chatgpt.com/docs/prompting) · [Vision](https://developers.openai.com/api/docs/guides/images-vision)
 
 ## What is distinctive for OpenAI models
 
@@ -23,9 +23,9 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
    report only. For change, build, or fix, make in-scope local changes and run non-destructive
    validation. Require confirmation for external writes, destructive actions, purchases, or
    scope expansion.
-4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and
-   output bar. If evidence is missing, name the smallest missing fact and use the smallest
-   useful fallback; never let loop minimization outrank correctness or required citations.
+4. **Stop on the evidence bar.** Stop when the core request meets its evidence/output
+   contract. If evidence is missing, name the smallest missing fact and smallest useful
+   fallback; never trade correctness or citations for fewer loops.
 5. **Verify Codex work.** For long or multi-step work, name the current phase: research, plan,
    implementation, or review. Follow repo patterns; run the smallest relevant repro, tests,
    lint, or build. For visual deliverables, render and inspect output. Put durable rules in
@@ -33,9 +33,9 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 6. **Ground retrieval.** Bound sources, dates, and the stop condition. Cite only retrieved
    support; label inference, assumptions, source conflicts, and missing evidence. Never
    fabricate citations or turn absence into a confident "no".
-7. **Route tools.** Resolve prerequisites; parallelize independent reads and sequence
-   dependent calls. For empty or partial results, try a bounded fallback; report the
-   gap. Expose only relevant tools.
+7. **Route tools.** Expose only relevant tools; resolve prerequisites; parallelize independent
+   reads and sequence dependent calls. For empty or partial results, set a task-level retry or
+   fallback limit and stop condition; report the gap when exhausted.
 8. **Handle images explicitly.** Pair each image with its task; use higher detail for small
    text. Verify exact counts and spatial layout instead of trusting them.
 9. **Prioritize response content.** Keep required facts, caveats, and next steps; trim
