@@ -26,21 +26,27 @@
 
 ---
 
-## 2. 宿主模型：GPT-5（Thinking）—— 精简，不添加思维链脚手架
+## 2. 宿主模型：GPT-5.6 —— 精简目标与输出契约
 
 **重构前**
 > figure out the time complexity of this function and whether it can be improved
 
 **重构后**（`strategies/openai.md`）
-> Analyze the time complexity of the function below and state whether it can be
-> improved; if so, give the improved complexity and the key idea. Be concise.
+> Goal: Analyze whether the function's time or space complexity can be improved.
 >
+> Input:
 > ```
 > [function]
 > ```
+>
+> Output contract:
+> - Define the variables used in the complexity analysis.
+> - State current time and space complexity.
+> - If an improvement exists, give its complexity and key idea.
+> - State any assumption that could change the result.
 
-> 为什么不加 "think step by step"？GPT-5 "Thinking" 类模型在内部自行推理，额外脚手架反而有害——
-> 应改为设置 **reasoning effort**。若宿主是 GPT-5 "Instant" 类模型，同样的请求则会改为"先简要推演再作答" + 一行输出格式说明。
+> 为什么是这个形态？GPT-5.6 默认不需要思维链请求。提示词应聚焦目标和必需输出；
+> 若宿主表面提供 **reasoning effort**，再根据实测任务需求单独设置。
 
 ---
 
@@ -90,14 +96,15 @@
 
 **重构后**（`strategies/openai.md`）
 > Goal: add rate limiting to the public API endpoints.
-> Done = requests over the limit return HTTP 429; existing tests still pass; new tests cover
-> the limit, a burst, and the reset window.
-> Approach: propose a short plan first, then implement in small steps. **Verify your work** —
-> run the test suite and the linter before finishing. Put durable repo conventions in
-> `AGENTS.md` rather than restating them here.
+> Context: inspect existing middleware and project conventions before editing.
+> Success criteria: over-limit requests return HTTP 429; existing behavior still passes;
+> targeted tests cover the limit, a burst, and the reset window.
+> Authorization: make the requested in-scope local edits and run non-destructive validation.
+> Boundaries: preserve unrelated behavior. Do not deploy, publish, or modify external configuration.
+> Verification: run the smallest relevant test and lint commands; report the commands and results.
 
-> 为什么是这个形态？Codex 在能**自我校验**、且大任务被**拆小**时产出更好；用"目标 + 成功标准"
-> 胜过逐步指令，而长期规则应放进 `AGENTS.md`，而不是每次塞进 prompt。
+> 为什么是这个形态？Codex 提示词应明确目标行为、相关上下文、约束和验证方式。
+> 只有当实现路径本身需要审阅时才要求计划，不把计划当成每次实现的固定前置步骤。
 
 ---
 

@@ -28,23 +28,28 @@ user's **original language is always preserved**.
 
 ---
 
-## 2. Host model: GPT-5 (Thinking) — minimal, no added chain-of-thought
+## 2. Host model: GPT-5.6 — lean outcome and output contract
 
 **Before**
 > figure out the time complexity of this function and whether it can be improved
 
 **After** (`strategies/openai.md`)
-> Analyze the time complexity of the function below and state whether it can be
-> improved; if so, give the improved complexity and the key idea. Be concise.
+> Goal: Analyze whether the function's time or space complexity can be improved.
 >
+> Input:
 > ```
 > [function]
 > ```
+>
+> Output contract:
+> - Define the variables used in the complexity analysis.
+> - State current time and space complexity.
+> - If an improvement exists, give its complexity and key idea.
+> - State any assumption that could change the result.
 
-> Why no "think step by step"? GPT-5 "Thinking"-class models reason internally — adding
-> scaffolding hurts; set **reasoning effort** instead. For a GPT-5 "Instant"-class host,
-> the same request would get an explicit "work through it briefly, then answer" plus an
-> output-format line.
+> Why this shape? GPT-5.6 does not need a chain-of-thought request by default. Keep the
+> prompt focused on the outcome and required output. If the surface exposes
+> **reasoning effort**, configure it separately based on measured task needs.
 
 ---
 
@@ -94,15 +99,16 @@ user's **original language is always preserved**.
 
 **After** (`strategies/openai.md`)
 > Goal: add rate limiting to the public API endpoints.
-> Done = requests over the limit return HTTP 429; existing tests still pass; new tests cover
-> the limit, a burst, and the reset window.
-> Approach: propose a short plan first, then implement in small steps. **Verify your work** —
-> run the test suite and the linter before finishing. Put durable repo conventions in
-> `AGENTS.md` rather than restating them here.
+> Context: inspect existing middleware and project conventions before editing.
+> Success criteria: over-limit requests return HTTP 429; existing behavior still passes;
+> targeted tests cover the limit, a burst, and the reset window.
+> Authorization: make the requested in-scope local edits and run non-destructive validation.
+> Boundaries: preserve unrelated behavior. Do not deploy, publish, or modify external configuration.
+> Verification: run the smallest relevant test and lint commands; report the commands and results.
 
-> Why this shape? Codex produces better output when it can **verify its work** and when large
-> tasks are **decomposed**; outcome + success criteria beat step-by-step dictation, and
-> durable rules belong in `AGENTS.md`, not the prompt.
+> Why this shape? Codex prompts should name the requested behavior, relevant context,
+> constraints, and verification. A plan is useful when the approach itself needs review;
+> it is not a required preamble for every implementation.
 
 ---
 

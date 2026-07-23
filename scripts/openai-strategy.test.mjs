@@ -204,6 +204,24 @@ test('Chinese README shows the current GPT-5.6 prompt shape', () => {
   assert.match(readme, /恰好 5 项[\s\S]{0,80}每项不超过 8 个字/);
 });
 
+test('OpenAI examples use GPT-5.6 reasoning and Codex authorization contracts', () => {
+  const staleExampleLabels =
+    /\bGPT-5\s*\((?:Thinking|Instant)\)|GPT-5\s+["“](?:Thinking|Instant)["”]|["“](?:Thinking|Instant)["”]-class/i;
+
+  for (const file of ['examples/README.md', 'examples/README.zh.md']) {
+    const examples = read(file);
+
+    assert.match(examples, /Host model: GPT-5\.6|宿主模型：GPT-5\.6/);
+    assert.doesNotMatch(examples, staleExampleLabels);
+    assert.doesNotMatch(examples, /\bBe concise\b|propose a short plan first/i);
+    assert.match(examples, /reasoning effort/i);
+    assert.match(examples, /in-scope local edits/i);
+    assert.match(examples, /Do not deploy/i);
+    assert.match(examples, /targeted tests/i);
+    assert.match(examples, /smallest relevant test and lint commands/i);
+  }
+});
+
 test('OpenAI anti-patterns reject behavior regressions and capability assumptions', () => {
   const antiPatterns = normalizeMarkdown(
     read('strategies/openai.md').split('## Anti-patterns to avoid')[1] ?? '',
