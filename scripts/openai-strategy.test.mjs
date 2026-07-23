@@ -25,3 +25,11 @@ test('OpenAI strategy keeps prompts lean without deleting measured requirements'
   assert.match(strategy, /state\s+each instruction once/i);
   assert.match(strategy, /examples?.*(?:product requirement|measured gap)/i);
 });
+
+test('OpenAI strategy defines completion and evidence-aware stop conditions', () => {
+  const strategy = read('strategies/openai.md');
+
+  assert.match(strategy, /success criteria[\s\S]{0,160}required\s+evidence/i);
+  assert.match(strategy, /stop when[\s\S]{0,120}core request[\s\S]{0,120}evidence/i);
+  assert.match(strategy, /smallest missing (?:fact|field)/i);
+});

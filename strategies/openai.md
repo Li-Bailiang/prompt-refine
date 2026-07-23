@@ -15,16 +15,15 @@ when available.
 
 ## Restructuring rules
 
-1. **Lead with the outcome, not the procedure.** State the goal, what "done/correct" looks
-   like (success criteria + required output fields), and the hard constraints — then stop.
-   Don't transcribe every step.
+1. **Lead with the outcome.** State the goal, useful context, success criteria, required
+   evidence, hard constraints, and output contract. Describe a process only when it matters.
 2. **Reserve absolutes for true invariants.** Use `MUST` / `NEVER` only for real rules
    (safety, format contracts); for judgment calls, give the decision criteria instead.
 3. **Separate instructions from content** with delimiters (` ``` `, `###`, or XML), and
    **specify the output contract** exactly ("Return JSON with keys …").
-4. **Agentic / multi-step asks**: set a stopping rule ("stop when you can answer the core
-   request") and allow persistence ("don't stop early if another tool call improves
-   correctness"); ask for a short verification pass before high-impact output.
+4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and
+   output bar. If evidence is missing, name the smallest missing fact and use the smallest
+   useful fallback; never let loop minimization outrank correctness or required citations.
 5. **Coding on Codex**: have it **verify its own work** — include repro steps, how to
    validate, and run lint/tests; split large work into smaller reviewable steps (ask it to
    propose a plan first if decomposition is unclear). Put durable, repo-wide rules in
