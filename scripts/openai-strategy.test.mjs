@@ -121,12 +121,16 @@ test('OpenAI strategy bounds retrieval and distinguishes evidence from inference
 });
 
 test('OpenAI strategy controls response length by content priority', () => {
-  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+  const markdown = read('strategies/openai.md');
+  const strategy = normalizeMarkdown(markdown);
+  const rules = normalizeMarkdown(
+    markdown.split('## Restructuring rules')[1]?.split('## Anti-patterns to avoid')[0] ?? '',
+  );
 
   assert.match(strategy, /required facts, caveats, and next steps/i);
   assert.match(strategy, /trim repetition and optional background first/i);
   assert.match(strategy, /tone with concrete writing choices, not labels/i);
-  assert.doesNotMatch(strategy, /\b(?:be concise|keep it short)\b/i);
+  assert.doesNotMatch(rules, /\b(?:be concise|keep it short)\b/i);
 });
 
 test('OpenAI strategy makes long Codex work phase-aware and verifiable', () => {
@@ -137,4 +141,19 @@ test('OpenAI strategy makes long Codex work phase-aware and verifiable', () => {
   assert.match(strategy, /smallest relevant repro, tests, lint, or build/i);
   assert.match(strategy, /render and inspect visual output/i);
   assert.match(strategy, /request a plan only when the approach matters/i);
+});
+
+test('OpenAI anti-patterns reject behavior regressions and capability assumptions', () => {
+  const antiPatterns = normalizeMarkdown(
+    read('strategies/openai.md').split('## Anti-patterns to avoid')[1] ?? '',
+  );
+
+  assert.match(antiPatterns, /repeated, conflicting, or process-heavy instruction stacks/i);
+  assert.match(antiPatterns, /"be concise".{0,80}"be thorough".{0,80}"think step by step"/i);
+  assert.match(antiPatterns, /ask-first loops.{0,100}authorized local work/i);
+  assert.match(antiPatterns, /repeating a failing tool route/i);
+  assert.match(
+    antiPatterns,
+    /Pro mode, Programmatic Tool Calling, persisted reasoning, explicit caching, or multi-agent.{0,80}every surface/i,
+  );
 });

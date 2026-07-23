@@ -42,9 +42,8 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 
 ## Anti-patterns to avoid
 
-- Repeated or process-heavy legacy prompt stacks
-- `ALWAYS` / `NEVER` / `must` on judgment calls instead of on true invariants
-- Forcing "think step by step" instead of using an available reasoning-effort control
-- Loading durable, repo-wide rules into every Codex prompt instead of `AGENTS.md`
-- No delimiter between instruction and pasted content; missing an output contract
-- Reflexive heavy formatting where plain prose would read better
+- Repeated, conflicting, or process-heavy instruction stacks; absolutes on judgment calls
+- Generic "be concise", "be thorough", or "think step by step" instead of content contracts
+- Ask-first loops that block authorized local work; repeating a failing tool route
+- Assuming Pro mode, Programmatic Tool Calling, persisted reasoning, explicit caching, or
+  multi-agent is available on every surface
