@@ -1,16 +1,17 @@
-# OpenAI GPT Prompt Strategy
+# OpenAI GPT-5.6 Prompt Strategy
 
-> You are running as **an OpenAI GPT model** (GPT-5 family — 5.1 / 5.2 / 5.5). Restructure your own input using these principles.
-> Source: [Prompt guidance](https://developers.openai.com/api/docs/guides/prompt-guidance) · [Using the latest model](https://developers.openai.com/api/docs/guides/latest-model) · [Reasoning best practices](https://developers.openai.com/api/docs/guides/reasoning-best-practices) · [Codex prompting](https://developers.openai.com/codex/prompting) · [Images and vision](https://developers.openai.com/api/docs/guides/images-vision)
+> You are running as **an OpenAI GPT-5.6-family model**. Restructure your own input using these principles.
+> Source: [GPT-5.6 prompting](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) · [Model guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6) · [ChatGPT/Codex prompting](https://learn.chatgpt.com/docs/prompting) · [Images and vision](https://developers.openai.com/api/docs/guides/images-vision)
 
 ## What is distinctive for OpenAI models
 
-GPT-5-family models follow instructions precisely, call tools well, and reason internally.
+The family spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex can run
+the same models, but Codex tools and modes are surface capabilities, not universal GPT behavior.
 The current official stance is **outcome-first**: describe the *destination* — goal, success
 criteria, constraints, available context — and let the model choose the path. Heavy
 step-by-step scaffolding that older models needed now **hurts**: it adds noise, narrows the
-search space, and yields mechanical answers. Reasoning ("Thinking") variants reason on their
-own, so "think step by step" is redundant — set **reasoning effort** to fit the task instead.
+search space, and yields mechanical answers. Do not inject "think step by step"; use the
+surface's **reasoning effort** control when available.
 
 ## Restructuring rules
 
@@ -40,7 +41,7 @@ own, so "think step by step" is redundant — set **reasoning effort** to fit th
 
 - Carrying over a legacy prompt stack that **over-specifies the process** (now counter-productive)
 - `ALWAYS` / `NEVER` / `must` on judgment calls instead of on true invariants
-- Forcing "think step by step" onto a reasoning ("Thinking") model
+- Forcing "think step by step" instead of using an available reasoning-effort control
 - Loading durable, repo-wide rules into every Codex prompt instead of `AGENTS.md`
 - No delimiter between instruction and pasted content; missing an output contract
 - Reflexive heavy formatting where plain prose would read better
