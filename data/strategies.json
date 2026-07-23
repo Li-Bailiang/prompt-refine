@@ -2,11 +2,11 @@
   {
     "id": "openai",
     "file": "strategies/openai.md",
-    "skillLabel": "GPT / GPT-5 (OpenAI)",
-    "readmeLabelEn": "OpenAI GPT (GPT-5 family)",
-    "readmeLabelZh": "OpenAI GPT（GPT-5 系列）",
-    "sourceEn": "OpenAI prompting guidance",
-    "sourceZh": "OpenAI 提示词指南"
+    "skillLabel": "GPT / GPT-5 (OpenAI; GPT-5.6 guidance)",
+    "readmeLabelEn": "OpenAI GPT (GPT-5.6 guidance)",
+    "readmeLabelZh": "OpenAI GPT（GPT-5.6 指南）",
+    "sourceEn": "OpenAI GPT-5.6 model and prompting guidance",
+    "sourceZh": "OpenAI GPT-5.6 模型与提示词指南"
   },
   {
     "id": "anthropic",

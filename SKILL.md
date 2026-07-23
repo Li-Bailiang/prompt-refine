@@ -29,7 +29,7 @@ answer (unless verbose mode is on).
 
 | If you are running as… | Load |
 |---|---|
-| GPT / GPT-5 (OpenAI) | `strategies/openai.md` |
+| GPT / GPT-5 (OpenAI; GPT-5.6 guidance) | `strategies/openai.md` |
 | Claude (Anthropic) | `strategies/anthropic.md` |
 | Gemini (Google) | `strategies/google-gemini.md` |
 | Llama (Meta) | `strategies/meta-llama.md` |

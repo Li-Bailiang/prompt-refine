@@ -232,7 +232,7 @@ Most tools also accept the shared `.agents/skills/` convention. User-level paths
 
 | Host model | Strategy file | Source family |
 |---|---|---|
-| OpenAI GPT (GPT-5 family) | `strategies/openai.md` | OpenAI prompting guidance |
+| OpenAI GPT (GPT-5.6 guidance) | `strategies/openai.md` | OpenAI GPT-5.6 model and prompting guidance |
 | Anthropic Claude | `strategies/anthropic.md` | Anthropic prompt engineering |
 | Google Gemini | `strategies/google-gemini.md` | Gemini prompt design |
 | Meta Llama | `strategies/meta-llama.md` | Llama prompting guidance |

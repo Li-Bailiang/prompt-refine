@@ -225,7 +225,7 @@ tar -xzf prompt-refine-skill-*.tgz --strip-components=1 -C .agents/skills/prompt
 
 | 宿主模型 | 策略文件 | 来源家族 |
 |---|---|---|
-| OpenAI GPT（GPT-5 系列） | `strategies/openai.md` | OpenAI 提示词指南 |
+| OpenAI GPT（GPT-5.6 指南） | `strategies/openai.md` | OpenAI GPT-5.6 模型与提示词指南 |
 | Anthropic Claude | `strategies/anthropic.md` | Anthropic prompt engineering |
 | Google Gemini | `strategies/google-gemini.md` | Gemini prompt design |
 | Meta Llama | `strategies/meta-llama.md` | Llama prompting guidance |

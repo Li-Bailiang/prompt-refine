@@ -17,7 +17,10 @@ test('strategy manifest renders the SKILL.md routing table', () => {
   const manifest = loadManifest();
   const table = renderSkillTable(manifest);
 
-  assert.match(table, /\| GPT \/ GPT-5 \(OpenAI\) \| `strategies\/openai\.md` \|/);
+  assert.match(
+    table,
+    /\| GPT \/ GPT-5 \(OpenAI; GPT-5\.6 guidance\) \| `strategies\/openai\.md` \|/,
+  );
   assert.match(table, /\| DeepSeek V4 \(\+ R1\) \| `strategies\/deepseek\.md` \|/);
   assert.ok(read('SKILL.md').includes(table));
 });
@@ -30,8 +33,20 @@ test('strategy manifest renders consistent English and Chinese README tables', (
   assert.ok(read('README.md').includes(enTable));
   assert.ok(read('README.en.md').includes(enTable));
   assert.ok(read('README.zh.md').includes(zhTable));
-  assert.match(zhTable, /OpenAI GPT（GPT-5 系列）/);
+  assert.match(zhTable, /OpenAI GPT（GPT-5\.6 指南）/);
   assert.match(zhTable, /DeepSeek V4（含 R1）/);
+});
+
+test('strategy manifest keeps one OpenAI route with GPT-5.6 guidance labels', () => {
+  const manifest = loadManifest();
+  const openai = manifest.find((entry) => entry.id === 'openai');
+
+  assert.ok(openai);
+  assert.equal(openai.file, 'strategies/openai.md');
+  assert.equal(openai.readmeLabelEn, 'OpenAI GPT (GPT-5.6 guidance)');
+  assert.equal(openai.readmeLabelZh, 'OpenAI GPT（GPT-5.6 指南）');
+  assert.match(openai.sourceEn, /GPT-5\.6 model and prompting guidance/);
+  assert.match(openai.sourceZh, /GPT-5\.6 模型与提示词指南/);
 });
 
 test('strategy manifest includes Perplexity as a source-grounded model family', () => {
