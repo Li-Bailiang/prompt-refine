@@ -18,8 +18,8 @@ surface's reasoning-effort control when available.
 
 1. **Lead with the outcome.** State the goal, useful context, success criteria, required
    evidence, hard constraints, and output contract. Describe a process only when it matters.
-2. **Reserve absolutes for true invariants.** Use `MUST` / `NEVER` only for real rules
-   (safety, format contracts); for judgment calls, give the decision criteria instead.
+2. **Protect invariants.** Preserve explicit user values and use `MUST` / `NEVER` only for
+   real rules such as safety or format contracts; for judgment calls, give decision criteria.
 3. **Separate instructions from content** with delimiters (` ``` `, `###`, or XML), and
    **specify the output contract** exactly ("Return JSON with keys …").
 4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and

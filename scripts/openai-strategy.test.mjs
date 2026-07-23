@@ -86,3 +86,10 @@ test('OpenAI strategy defines completion and evidence-aware stop conditions', ()
   assert.match(strategy, /stop when.{0,120}core request.{0,120}evidence/i);
   assert.match(strategy, /smallest missing (?:fact|field)/i);
 });
+
+test('OpenAI strategy separates invariants from judgment rules', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /preserve explicit user values/i);
+  assert.match(strategy, /judgment calls?.{0,80}decision criteria/i);
+});
