@@ -94,30 +94,30 @@ which parts depend on assumptions.
 </success_criteria>
 ```
 
-OpenAI GPT shape:
+OpenAI GPT-5.6 shape:
 
 ```text
 Goal: Turn an underspecified market-analysis request into a useful first-pass competitive landscape.
 
-User request:
-"""Help me analyze this market."""
-
-Relevant context:
+Context:
+- User request: "Help me analyze this market."
 - Market, geography, audience, and timeframe are missing.
 - Preserve uncertainty and make assumptions explicit.
 
-Instructions:
-1. State the assumed market scope first.
-2. Identify likely player categories and competitive dynamics.
-3. Compare barriers, switching costs, and strategic implications.
-4. Flag unknowns instead of inventing facts.
+Required evidence:
+- Use supplied sources for factual claims.
+- For current claims, use retrieved sources when search is available; otherwise mark them unverified.
+- Cite support near each current claim and label assumptions or inferences.
 
-Hard constraints:
-- Do not claim current market data unless it was provided or can be verified.
-- Ask only 1-2 follow-up questions.
+Boundaries:
+- Do not invent market facts or silently narrow the missing scope.
+- Ask at most 1-2 questions, and only when the answers would materially change the analysis.
 
-Output format: Markdown headings for Assumptions, Competitive Map, Barriers,
+Output contract: Markdown headings for Assumptions, Competitive Map, Barriers,
 Strategic Implications, Unknowns, and Next Questions.
+
+Success criteria: The first pass is useful before clarification, and every current claim
+is supported or marked unverified.
 ```
 
 ### 2. Clear Request: Preserve The Constraints
@@ -146,24 +146,19 @@ Exactly 5 items, each under 8 words, with all requested topics covered.
 </success_criteria>
 ```
 
-OpenAI GPT shape:
+OpenAI GPT-5.6 shape:
 
 ```text
-Task: Write exactly five npm release checklist items.
+Goal: Write an npm release checklist.
 
-Context: The user already provided clear hard constraints, so preserve them and do not add scope.
+Required content: package.json, README, LICENSE, version, and dry-run publishing.
 
-Hard constraints:
-- Under 8 words per item.
-- Cover package.json, README, LICENSE, version, and dry-run publishing.
-- Return only the checklist.
+Boundaries: Preserve the user's exact count, word limit, and requested topics: exactly five
+items, each under 8 words, with no new scope, introduction, or closing note.
 
-Output contract:
-- Numbered list.
-- Exactly 5 lines.
-- No intro or outro.
+Output contract: A numbered list with one item per line.
 
-Quality check before answering: each item is under 8 words and covers one requested release topic.
+Success criteria: Check every line against the boundaries before answering.
 ```
 
 ### What The User Sees
