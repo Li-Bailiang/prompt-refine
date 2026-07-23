@@ -17,11 +17,13 @@ surface's reasoning-effort control when available.
 ## Restructuring rules
 
 1. **Lead with the outcome.** State the goal, useful context, success criteria, required
-   evidence, hard constraints, and output contract. Describe a process only when it matters.
+   evidence, hard constraints, and output contract; delimit pasted content. Add process only
+   when it matters.
 2. **Protect invariants.** Preserve explicit user values and use `MUST` / `NEVER` only for
    real rules such as safety or format contracts; for judgment calls, give decision criteria.
-3. **Separate instructions from content** with delimiters (` ``` `, `###`, or XML), and
-   **specify the output contract** exactly ("Return JSON with keys …").
+3. **Set authorization once.** For answer, explain, review, diagnose, or plan, inspect and
+   report only. For change, build, or fix, make in-scope local changes and run non-destructive
+   validation. Require confirmation for external, destructive, costly, or scope-expanding actions.
 4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and
    output bar. If evidence is missing, name the smallest missing fact and use the smallest
    useful fallback; never let loop minimization outrank correctness or required citations.

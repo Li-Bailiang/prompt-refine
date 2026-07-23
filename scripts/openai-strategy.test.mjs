@@ -93,3 +93,12 @@ test('OpenAI strategy separates invariants from judgment rules', () => {
   assert.match(strategy, /preserve explicit user values/i);
   assert.match(strategy, /judgment calls?.{0,80}decision criteria/i);
 });
+
+test('OpenAI strategy defines request-level authorization boundaries', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /answer, explain, review, diagnose, or plan.{0,140}inspect.{0,80}report/i);
+  assert.match(strategy, /change, build, or fix.{0,140}in-scope local changes/i);
+  assert.match(strategy, /non-destructive validation/i);
+  assert.match(strategy, /confirmation.{0,100}external, destructive, costly, or scope-expanding/i);
+});
