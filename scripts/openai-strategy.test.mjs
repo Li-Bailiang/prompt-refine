@@ -7,9 +7,14 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => readFileSync(join(root, file), 'utf8').replace(/\r\n/g, '\n');
 const normalizeMarkdown = (value) => value.replace(/^>\s?/gm, '').replace(/\s+/g, ' ').trim();
-const staleOpenAIReferences =
-  /\bGPT-5\.[1-5]\b|\b(?:Thinking|Instant)\s+(?:mode|model|variant)\b|\bGPT-5\s*\((?:Thinking|Instant)\)/i;
-const hasLeanPromptRule = (value) => {
+const staleOpenAIFraming = [
+  /\bGPT-5 family\s*(?:—|-|:)\s*5\.1\s*\/\s*5\.2\s*\/\s*5\.5\b/i,
+  /\bReasoning\s*\(\s*["']?Thinking["']?\s*\)\s+variants?\b/i,
+  /\b(?:current|latest)\s+(?:OpenAI\s+)?(?:GPT\s+)?(?:model|family)\s+(?:is|remains|uses)\s+GPT-5\.[1-5]\b/i,
+];
+const hasStaleOpenAIFraming = (value) =>
+  staleOpenAIFraming.some((pattern) => pattern.test(normalizeMarkdown(value)));
+const hasAuditedLeanCopy = (value) => {
   const normalized = normalizeMarkdown(value);
   return (
     /(?:^|[.!?]\s+)State each instruction once\./.test(normalized) &&
@@ -31,48 +36,43 @@ test('OpenAI strategy conditionally applies current GPT-5.6 guidance', () => {
   assert.match(strategy, /gpt-5\.6-terra/);
   assert.match(strategy, /gpt-5\.6-luna/);
   assert.match(strategy, /prompt-guidance-gpt-5p6/);
-  assert.doesNotMatch(strategy, staleOpenAIReferences);
+  assert.equal(hasStaleOpenAIFraming(strategy), false);
 });
 
-test('stale OpenAI reference detector is limited to model and mode labels', () => {
+test('stale OpenAI framing detector catches the removed current-model claims', () => {
   for (const stale of [
-    'GPT-5.1',
-    'gpt-5.2',
-    'GPT-5.3',
-    'GPT-5.4',
-    'GPT-5.5',
-    'Thinking mode',
-    'instant model',
-    'GPT-5 (Thinking)',
+    'You are running as an OpenAI GPT model (GPT-5 family — 5.1 / 5.2 / 5.5).',
+    'Reasoning ("Thinking") variants reason on their own.',
+    'The current OpenAI model is GPT-5.5.',
   ]) {
-    assert.match(stale, staleOpenAIReferences);
+    assert.equal(hasStaleOpenAIFraming(stale), true);
   }
-  for (const currentOrProse of [
-    'GPT-5.6',
+  for (const historicalOrProse of [
+    'Migrating from GPT-5.5 or GPT-5.4 to GPT-5.6 requires prompt review.',
     'Section 5.1',
     'thinking about the answer',
     'instant feedback',
     'reasoning effort',
   ]) {
-    assert.doesNotMatch(currentOrProse, staleOpenAIReferences);
+    assert.equal(hasStaleOpenAIFraming(historicalOrProse), false);
   }
 });
 
-test('OpenAI strategy keeps prompts lean without deleting measured requirements', () => {
+test('OpenAI strategy retains the audited lean-prompt copy contract', () => {
   const strategy = read('strategies/openai.md');
 
-  assert.equal(hasLeanPromptRule(strategy), true);
+  assert.equal(hasAuditedLeanCopy(strategy), true);
 });
 
-test('lean prompt matcher tolerates wrapping and rejects reversed guidance', () => {
+test('audited lean copy matcher tolerates wrapping and rejects reversed guidance', () => {
   assert.equal(
-    hasLeanPromptRule(
+    hasAuditedLeanCopy(
       'State each instruction\nonce. Keep examples only when they encode a product\nrequirement or fix a measured gap.',
     ),
     true,
   );
   assert.equal(
-    hasLeanPromptRule(
+    hasAuditedLeanCopy(
       'Do not state each instruction once. Keep every example, whether or not it addresses a measured gap.',
     ),
     false,
