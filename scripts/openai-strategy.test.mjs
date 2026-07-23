@@ -192,6 +192,18 @@ test('English READMEs show the current GPT-5.6 prompt shape', () => {
   assert.match(readme, /exactly five[\s\S]{0,80}under 8 words/);
 });
 
+test('Chinese README shows the current GPT-5.6 prompt shape', () => {
+  const readme = read('README.zh.md');
+
+  assert.equal(readme.match(/^OpenAI GPT-5\.6 格式：$/gm)?.length, 2);
+  assert.doesNotMatch(readme, /^OpenAI GPT 格式：$/m);
+  assert.match(readme, /证据要求：[\s\S]{0,500}边界：/);
+  assert.match(readme, /边界：[\s\S]{0,500}输出契约：/);
+  assert.match(readme, /输出契约：[\s\S]{0,500}成功标准：/);
+  assert.match(readme, /保留用户给出的确切数量、字数限制和主题/);
+  assert.match(readme, /恰好 5 项[\s\S]{0,80}每项不超过 8 个字/);
+});
+
 test('OpenAI anti-patterns reject behavior regressions and capability assumptions', () => {
   const antiPatterns = normalizeMarkdown(
     read('strategies/openai.md').split('## Anti-patterns to avoid')[1] ?? '',
