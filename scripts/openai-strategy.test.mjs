@@ -119,3 +119,12 @@ test('OpenAI strategy bounds retrieval and distinguishes evidence from inference
   assert.match(strategy, /label inference, assumptions, source conflicts, and missing evidence/i);
   assert.match(strategy, /absence.{0,60}(?:confident )?["']no["']/i);
 });
+
+test('OpenAI strategy controls response length by content priority', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /required facts, caveats, and next steps/i);
+  assert.match(strategy, /trim repetition and optional background first/i);
+  assert.match(strategy, /tone with concrete writing choices, not labels/i);
+  assert.doesNotMatch(strategy, /\b(?:be concise|keep it short)\b/i);
+});

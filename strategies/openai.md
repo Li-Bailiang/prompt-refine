@@ -6,8 +6,8 @@
 
 ## What is distinctive for OpenAI models
 
-GPT-5.6 spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex may run them,
-but its tools and modes are surface capabilities. Favor lean, **outcome-first** prompts:
+GPT-5.6 spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex tools and modes
+remain surface-specific. Favor lean, **outcome-first** prompts:
 destination, evidence, constraints, and completion bar; let the model choose the path.
 State each instruction once. Keep examples only when they encode a product requirement or
 fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning-effort control.
@@ -35,13 +35,14 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 7. **Route tools.** Resolve prerequisites; parallelize independent reads and sequence
    dependent calls. For empty or partial results, try a bounded fallback; report the
    gap. Expose only relevant tools.
-8. **Multimodal (vision)**: say exactly what to do with each image and keep the question with
-   it; raise image detail for small or low-quality text. Don't rely on the model for
-   **precise spatial layout or exact counts** (documented weak spots).
+8. **Handle images explicitly.** Pair each image with its task; use higher detail for small
+   text. Verify exact counts and spatial layout instead of trusting them.
+9. **Prioritize response content.** Keep required facts, caveats, and next steps; trim
+   repetition and optional background first. Define tone with concrete writing choices, not labels.
 
 ## Anti-patterns to avoid
 
-- Carrying over a legacy prompt stack that **over-specifies the process** (now counter-productive)
+- Repeated or process-heavy legacy prompt stacks
 - `ALWAYS` / `NEVER` / `must` on judgment calls instead of on true invariants
 - Forcing "think step by step" instead of using an available reasoning-effort control
 - Loading durable, repo-wide rules into every Codex prompt instead of `AGENTS.md`
