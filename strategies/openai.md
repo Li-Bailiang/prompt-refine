@@ -21,7 +21,8 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
    real rules such as safety or format contracts; for judgment calls, give decision criteria.
 3. **Set authorization once.** For answer, explain, review, diagnose, or plan, inspect and
    report only. For change, build, or fix, make in-scope local changes and run non-destructive
-   validation. Require confirmation for external, destructive, costly, or scope-expanding actions.
+   validation. Require confirmation for external writes, destructive actions, purchases, or
+   scope expansion.
 4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and
    output bar. If evidence is missing, name the smallest missing fact and use the smallest
    useful fallback; never let loop minimization outrank correctness or required citations.

@@ -95,12 +95,20 @@ test('OpenAI strategy separates invariants from judgment rules', () => {
 });
 
 test('OpenAI strategy defines request-level authorization boundaries', () => {
-  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+  const markdown = read('strategies/openai.md');
+  const strategy = normalizeMarkdown(markdown);
+  const authorization = normalizeMarkdown(
+    markdown.split('3. **Set authorization once.**')[1]?.split('4. **')[0] ?? '',
+  );
 
   assert.match(strategy, /answer, explain, review, diagnose, or plan.{0,140}inspect.{0,80}report/i);
   assert.match(strategy, /change, build, or fix.{0,140}in-scope local changes/i);
   assert.match(strategy, /non-destructive validation/i);
-  assert.match(strategy, /confirmation.{0,100}external, destructive, costly, or scope-expanding/i);
+  assert.match(
+    authorization,
+    /confirmation.{0,120}external writes, destructive actions, purchases, or scope expansion/i,
+  );
+  assert.doesNotMatch(authorization, /\bexternal (?:reads?|search(?:es)?|retrieval|actions?)\b/i);
 });
 
 test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
