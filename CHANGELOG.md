@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **GPT-5.6 static contract-review suite** with 10 targeted cases covering clear and
+  vague requests, authorization boundaries, external writes, retrieval evidence,
+  response length, long tasks, Codex verification, and visual deliverables. The guarded
+  harness mode is dry-run and generate-only, so it does not claim measured GPT-5.6 uplift.
 - **Perplexity / Sonar strategy** grounded in the official Perplexity Prompt Guide, focused
   on source-bounded research, retrieval constraints, citation discipline, and uncertainty
   handling.
@@ -28,6 +32,15 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   GLM-5V multimodal task binding.
 - **GLM before/after examples** showing coding-agent boundaries and completion criteria in
   English and Chinese.
+
+### Changed
+- **OpenAI strategy refreshed for GPT-5.6** and the Sol / Terra / Luna family. The strategy
+  now favors lean outcome and evidence contracts, distinguishes invariants from judgment
+  rules, defines authorization and stopping boundaries, bounds retrieval and tool fallback,
+  prioritizes required response content, and strengthens Codex and visual verification.
+- **OpenAI routing labels, README prompt shapes, and examples** now use GPT-5.6 guidance
+  without splitting the single `openai` route or treating Codex-only workflow capabilities
+  as universal model features.
 
 ## [2.3.0] — 2026-06-08
 
