@@ -22,7 +22,7 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 3. **Set authorization once.** For answer, explain, review, diagnose, or plan, inspect and
    report only. For change, build, or fix, make in-scope local changes and run non-destructive
    validation. Require confirmation for external writes, destructive actions, purchases, or
-   scope expansion.
+   a material expansion of scope.
 4. **Stop on the evidence bar.** Stop when the core request meets its evidence/output
    contract. If evidence is missing, name the smallest missing fact and smallest useful
    fallback; never trade correctness or citations for fewer loops.

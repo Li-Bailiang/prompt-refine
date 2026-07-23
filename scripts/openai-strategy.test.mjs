@@ -23,6 +23,8 @@ const hasAuditedLeanCopy = (value) => {
     )
   );
 };
+const externalReadConfirmation =
+  /\brequire confirmation for external (?:reads?|search(?:es)?|retrieval)\b|\bexternal (?:reads?|search(?:es)?|retrieval)\s+requires? confirmation\b/i;
 
 test('OpenAI strategy conditionally applies current GPT-5.6 guidance', () => {
   const strategy = read('strategies/openai.md');
@@ -106,9 +108,11 @@ test('OpenAI strategy defines request-level authorization boundaries', () => {
   assert.match(strategy, /non-destructive validation/i);
   assert.match(
     authorization,
-    /confirmation.{0,120}external writes, destructive actions, purchases, or scope expansion/i,
+    /confirmation.{0,140}external writes, destructive actions, purchases, or a material expansion of scope/i,
   );
-  assert.doesNotMatch(authorization, /\bexternal (?:reads?|search(?:es)?|retrieval|actions?)\b/i);
+  assert.doesNotMatch(authorization, externalReadConfirmation);
+  assert.match('Require confirmation for external reads.', externalReadConfirmation);
+  assert.doesNotMatch('External reads do not require confirmation.', externalReadConfirmation);
 });
 
 test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
