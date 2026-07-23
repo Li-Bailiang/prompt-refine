@@ -7,11 +7,11 @@
 
 The family spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex can run
 the same models, but Codex tools and modes are surface capabilities, not universal GPT behavior.
-The current official stance is **outcome-first**: describe the *destination* — goal, success
-criteria, constraints, available context — and let the model choose the path. Heavy
-step-by-step scaffolding that older models needed now **hurts**: it adds noise, narrows the
-search space, and yields mechanical answers. Do not inject "think step by step"; use the
-surface's **reasoning effort** control when available.
+GPT-5.6 favors lean, **outcome-first** prompts: define the destination, useful context or
+evidence, hard constraints, and completion bar, then let the model choose the path. State
+each instruction once. Keep examples only when they encode a product requirement or fix a
+measured gap. Do not inject "think step by step"; use the surface's reasoning-effort control
+when available.
 
 ## Restructuring rules
 

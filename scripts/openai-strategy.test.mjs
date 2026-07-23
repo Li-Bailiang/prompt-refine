@@ -18,3 +18,10 @@ test('OpenAI strategy targets the current GPT-5.6 family', () => {
   assert.doesNotMatch(strategy, /5\.1\s*\/\s*5\.2\s*\/\s*5\.5/);
   assert.doesNotMatch(strategy, /\b(?:Thinking|Instant)\b/);
 });
+
+test('OpenAI strategy keeps prompts lean without deleting measured requirements', () => {
+  const strategy = read('strategies/openai.md');
+
+  assert.match(strategy, /state\s+each instruction once/i);
+  assert.match(strategy, /examples?.*(?:product requirement|measured gap)/i);
+});
