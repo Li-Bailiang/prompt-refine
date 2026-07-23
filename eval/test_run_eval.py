@@ -79,6 +79,69 @@ class EvalHarnessFlagsTest(unittest.TestCase):
         self.assertEqual(run_eval.default_rubric_path("vague").name, "rubric.vague.md")
         self.assertEqual(run_eval.default_rubric_path("guard").name, "rubric.guard.md")
 
+    def test_openai_review_suite_loads_contract_corpus_and_rubric(self) -> None:
+        prompts = run_eval.load_suite_prompts("openai-gpt56", limit=0)
+
+        self.assertEqual(len(prompts), 10)
+        self.assertEqual(prompts[0]["id"], "gpt56-clear-task")
+        self.assertEqual(
+            run_eval.default_rubric_path("openai-gpt56").name,
+            "rubric.openai-gpt56.md",
+        )
+
+    def test_openai_review_suite_is_dry_run_only(self) -> None:
+        args = SimpleNamespace(suite="openai-gpt56", host="openai", dry_run=False)
+
+        with self.assertRaisesRegex(SystemExit, "dry-run only"):
+            run_eval.run(args)
+
+    def test_openai_review_suite_requires_openai_host(self) -> None:
+        args = SimpleNamespace(suite="openai-gpt56", host="anthropic", dry_run=True)
+
+        with self.assertRaisesRegex(SystemExit, "requires --host openai"):
+            run_eval.run(args)
+
+    def test_openai_review_suite_requires_generate_only(self) -> None:
+        args = SimpleNamespace(
+            suite="openai-gpt56",
+            host="openai",
+            dry_run=True,
+            generate_only=False,
+        )
+
+        with self.assertRaisesRegex(SystemExit, "requires --generate-only"):
+            run_eval.run(args)
+
+    def test_openai_review_dry_run_records_contract_review_without_scores(self) -> None:
+        out_name = "test-openai-gpt56-dry-run.json"
+        out_path = run_eval.EVAL_DIR / "results" / out_name
+        out_path.unlink(missing_ok=True)
+        self.addCleanup(lambda: out_path.unlink(missing_ok=True))
+
+        args = SimpleNamespace(
+            host="openai",
+            suite="openai-gpt56",
+            gen_model="gpt-5.6-sol",
+            judge_model="not-used",
+            prompts_file=None,
+            rubric_file=None,
+            generate_only=True,
+            limit=0,
+            dry_run=True,
+            seed=7,
+            out=out_name,
+        )
+
+        run_eval.run(args)
+        payload = json.loads(out_path.read_text(encoding="utf-8"))
+        config = payload["summary"]["config"]
+
+        self.assertEqual(config["suite_purpose"], "contract_review")
+        self.assertEqual(config["host_strategy"], "openai")
+        self.assertEqual(config["n_prompts"], 10)
+        self.assertEqual(config["judgments"], 0)
+        self.assertIsNone(payload["summary"]["refine_win_rate"])
+
     def test_rubric_file_override_is_recorded_in_summary(self) -> None:
         prompt_file = self.make_prompt_file(
             [{"id": "x1", "lang": "en", "domain": "debugging", "prompt": "my app is slow"}]

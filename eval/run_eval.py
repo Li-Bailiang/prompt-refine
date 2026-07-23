@@ -49,6 +49,11 @@ SUITES = {
         "rubric_file": "rubric.guard.md",
         "purpose": "non_regression",
     },
+    "openai-gpt56": {
+        "prompts_file": "prompts.openai-gpt56.jsonl",
+        "rubric_file": "rubric.openai-gpt56.md",
+        "purpose": "contract_review",
+    },
 }
 
 # Structured-output schema for the judge. Note: numeric min/max isn't enforceable
@@ -270,6 +275,13 @@ def judge_metadata(dry_run: bool, generate_only: bool) -> tuple[str, bool | None
 
 def run(args) -> None:
     suite = normalize_suite(getattr(args, "suite", "vague"))
+    if suite == "openai-gpt56":
+        if args.host != "openai":
+            sys.exit("ERROR: openai-gpt56 requires --host openai.")
+        if not args.dry_run:
+            sys.exit("ERROR: openai-gpt56 is dry-run only; the harness does not call GPT-5.6.")
+        if not bool(getattr(args, "generate_only", False)):
+            sys.exit("ERROR: openai-gpt56 requires --generate-only to avoid synthetic scores.")
     prompts_file = getattr(args, "prompts_file", None) or default_prompt_path(suite)
     rubric_file = getattr(args, "rubric_file", None) or default_rubric_path(suite)
     generate_only = bool(getattr(args, "generate_only", False))
@@ -429,7 +441,7 @@ def run(args) -> None:
 def main() -> None:
     p = argparse.ArgumentParser(description="Prompt Refine A/B eval.")
     p.add_argument("--host", default="anthropic", help="strategy file under strategies/ (default: anthropic)")
-    p.add_argument("--suite", choices=sorted(SUITES), default="vague", help="eval suite: vague uplift or guard non-regression")
+    p.add_argument("--suite", choices=sorted(SUITES), default="vague", help="evaluation suite")
     p.add_argument("--gen-model", default="claude-sonnet-4-6", help="model under test")
     p.add_argument("--judge-model", default="claude-opus-4-8", help="judge model")
     p.add_argument("--prompts-file", default=None, help="JSONL prompt file override, relative to eval dir unless absolute")

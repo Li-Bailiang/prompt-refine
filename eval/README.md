@@ -11,11 +11,18 @@ package; using the skill does not require Python or the Anthropic SDK.
 |---|---|---|---|
 | `vague` | `prompts.jsonl` | `rubric.vague.md` | Small smoke suite for underspecified prompts. |
 | `guard` | `high_discrimination_prompts.jsonl` | `rubric.guard.md` | Measures non-regression on clear or constraint-heavy prompts. |
+| `openai-gpt56` | `prompts.openai-gpt56.jsonl` | `rubric.openai-gpt56.md` | Static GPT-5.6 strategy contract review; dry-run only. |
 
 The published 120-prompt vague result uses the three chunk files
 `prompts.all_c1.jsonl`, `prompts.all_c2.jsonl`, and `prompts.all_c3.jsonl`, with matching
 result files in `results/final_c*.json`. Use `guard` as a quality gate: refine should
 not damage JSON/config outputs, word limits, language fidelity, or direct-answer tasks.
+
+The `openai-gpt56` corpus has 10 targeted cases: clear and vague requests, read-only
+review, authorized local changes, external writes, retrieval evidence, output length,
+long tasks, Codex verification, and visual deliverables. Each row includes explicit
+expected and forbidden behaviors for manual review. This suite is not a published model
+benchmark and has no checked-in score.
 
 ## What it does
 
@@ -39,6 +46,7 @@ export ANTHROPIC_API_KEY=sk-ant-...        # Windows: $env:ANTHROPIC_API_KEY="sk
 # Free plumbing checks:
 python run_eval.py --dry-run --suite vague
 python run_eval.py --dry-run --suite guard
+python run_eval.py --dry-run --generate-only --suite openai-gpt56 --host openai --gen-model gpt-5.6-sol --judge-model not-used --out openai-gpt56-dry-run.json
 
 # Low-cost generation-only samples:
 python run_eval.py --suite vague --limit 3 --generate-only --out vague-sample.json
@@ -57,15 +65,24 @@ python run_eval.py --suite vague --prompts-file prompts.all_c3.jsonl --out final
 python analyze_public.py
 ```
 
-Useful flags: `--host openai`, `--gen-model`, `--judge-model`, `--suite vague|guard`,
+Useful flags: `--host openai`, `--gen-model`, `--judge-model`,
+`--suite vague|guard|openai-gpt56`,
 `--prompts-file`, `--rubric-file`, `--generate-only`, `--limit N`, and `--out`.
 Defaults: suite `vague`, generation `claude-sonnet-4-6`, judge `claude-opus-4-8`.
+
+The `openai-gpt56` command only checks loading and output plumbing. Dry-run answers are
+synthetic, the model names are metadata, and the result file must not be cited as a
+GPT-5.6 evaluation. The runner rejects real or judged runs for this suite because its
+live provider is currently the Anthropic SDK; `--host openai` selects the strategy file,
+not an OpenAI model provider.
 
 ## Interpreting results
 
 - `vague` answers the uplift question: does refine help users move forward from vague
   prompts through better assumptions, structure, and actionability?
 - `guard` answers the safety question: does refine avoid making clear tasks worse?
+- `openai-gpt56` checks whether the strategy's documented contracts are represented by
+  reviewable cases. It does not answer an uplift or non-regression question.
 - Do not merge the two suites into one headline win-rate. A good result can be "vague
   improves, guard is neutral"; a bad result can be "vague improves, but guard regresses."
 - `--generate-only` produces answer pairs only. Any manual or conversation-side judge
@@ -74,6 +91,8 @@ Defaults: suite `vague`, generation `claude-sonnet-4-6`, judge `claude-opus-4-8`
 ## Honest caveats
 
 - Do not cite `--dry-run` numbers. Dry-run uses synthetic answers and judgments.
+- Do not report `openai-gpt56` as a model result until a real GPT-5.6 provider and
+  reproducible judging path exist.
 - One judge model has bias. For a public claim, use at least one second judge.
 - A full judged run costs `N * (2 generations + 2 judgments)` calls. Judge calls usually
   dominate cost, so use `--generate-only` when budget is tight.
