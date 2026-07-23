@@ -110,3 +110,12 @@ test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
   assert.match(strategy, /empty or partial results.{0,100}bounded fallback/i);
   assert.match(strategy, /expose only relevant tools/i);
 });
+
+test('OpenAI strategy bounds retrieval and distinguishes evidence from inference', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /bound sources, dates, and (?:the )?stop condition/i);
+  assert.match(strategy, /cite only retrieved support/i);
+  assert.match(strategy, /label inference, assumptions, source conflicts, and missing evidence/i);
+  assert.match(strategy, /absence.{0,60}(?:confident )?["']no["']/i);
+});

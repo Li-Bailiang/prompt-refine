@@ -6,13 +6,11 @@
 
 ## What is distinctive for OpenAI models
 
-For GPT-5.6, the family spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`.
-Codex can run the same models, but Codex tools and modes are surface capabilities, not
-universal GPT behavior. GPT-5.6 favors lean, **outcome-first** prompts: define the
-destination, useful context or evidence, hard constraints, and completion bar, then let the
-model choose the path. State each instruction once. Keep examples only when they encode a
-product requirement or fix a measured gap. Do not inject "think step by step"; use the
-surface's reasoning-effort control when available.
+GPT-5.6 spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex may run them,
+but its tools and modes are surface capabilities. Favor lean, **outcome-first** prompts:
+destination, evidence, constraints, and completion bar; let the model choose the path.
+State each instruction once. Keep examples only when they encode a product requirement or
+fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning-effort control.
 
 ## Restructuring rules
 
@@ -31,8 +29,9 @@ surface's reasoning-effort control when available.
    validate, and run lint/tests; split large work into smaller reviewable steps (ask it to
    propose a plan first if decomposition is unclear). Put durable, repo-wide rules in
    **`AGENTS.md`**, not in every prompt.
-6. **Grounding**: never fabricate citations, URLs, or IDs; separate confident facts from
-   uncertainty; don't turn missing evidence into a confident "no".
+6. **Ground retrieval.** Bound sources, dates, and the stop condition. Cite only retrieved
+   support; label inference, assumptions, source conflicts, and missing evidence. Never
+   fabricate citations or turn absence into a confident "no".
 7. **Route tools.** Resolve prerequisites; parallelize independent reads and sequence
    dependent calls. For empty or partial results, try a bounded fallback; report the
    gap. Expose only relevant tools.
