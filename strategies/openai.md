@@ -25,10 +25,10 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 4. **Set an evidence-aware stop rule.** Stop when the core request meets its evidence and
    output bar. If evidence is missing, name the smallest missing fact and use the smallest
    useful fallback; never let loop minimization outrank correctness or required citations.
-5. **Coding on Codex**: have it **verify its own work** — include repro steps, how to
-   validate, and run lint/tests; split large work into smaller reviewable steps (ask it to
-   propose a plan first if decomposition is unclear). Put durable, repo-wide rules in
-   **`AGENTS.md`**, not in every prompt.
+5. **Make Codex work verifiable.** Name the current phase: research, plan, implementation, or
+   review. Follow repo patterns; run the smallest relevant repro, tests, lint, or build, and
+   render and inspect visual output. Put durable rules in `AGENTS.md`; request a plan only when
+   the approach matters.
 6. **Ground retrieval.** Bound sources, dates, and the stop condition. Cite only retrieved
    support; label inference, assumptions, source conflicts, and missing evidence. Never
    fabricate citations or turn absence into a confident "no".

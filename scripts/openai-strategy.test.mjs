@@ -128,3 +128,13 @@ test('OpenAI strategy controls response length by content priority', () => {
   assert.match(strategy, /tone with concrete writing choices, not labels/i);
   assert.doesNotMatch(strategy, /\b(?:be concise|keep it short)\b/i);
 });
+
+test('OpenAI strategy makes long Codex work phase-aware and verifiable', () => {
+  const strategy = normalizeMarkdown(read('strategies/openai.md'));
+
+  assert.match(strategy, /current phase.{0,80}research, plan, implementation, or review/i);
+  assert.match(strategy, /follow repo patterns/i);
+  assert.match(strategy, /smallest relevant repro, tests, lint, or build/i);
+  assert.match(strategy, /render and inspect visual output/i);
+  assert.match(strategy, /request a plan only when the approach matters/i);
+});
