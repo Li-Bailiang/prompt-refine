@@ -1,17 +1,18 @@
-# OpenAI GPT-5.6 Prompt Strategy
+# OpenAI GPT Prompt Strategy (GPT-5.6 guidance)
 
-> You are running as **an OpenAI GPT-5.6-family model**. Restructure your own input using these principles.
+> You are running as **an OpenAI GPT-family model**. Preserve the runtime's actual model
+> identity; apply GPT-5.6-specific guidance only when the host identifies itself as GPT-5.6.
 > Source: [GPT-5.6 prompting](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) · [Model guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6) · [ChatGPT/Codex prompting](https://learn.chatgpt.com/docs/prompting) · [Images and vision](https://developers.openai.com/api/docs/guides/images-vision)
 
 ## What is distinctive for OpenAI models
 
-The family spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`. Codex can run
-the same models, but Codex tools and modes are surface capabilities, not universal GPT behavior.
-GPT-5.6 favors lean, **outcome-first** prompts: define the destination, useful context or
-evidence, hard constraints, and completion bar, then let the model choose the path. State
-each instruction once. Keep examples only when they encode a product requirement or fix a
-measured gap. Do not inject "think step by step"; use the surface's reasoning-effort control
-when available.
+For GPT-5.6, the family spans `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`.
+Codex can run the same models, but Codex tools and modes are surface capabilities, not
+universal GPT behavior. GPT-5.6 favors lean, **outcome-first** prompts: define the
+destination, useful context or evidence, hard constraints, and completion bar, then let the
+model choose the path. State each instruction once. Keep examples only when they encode a
+product requirement or fix a measured gap. Do not inject "think step by step"; use the
+surface's reasoning-effort control when available.
 
 ## Restructuring rules
 
