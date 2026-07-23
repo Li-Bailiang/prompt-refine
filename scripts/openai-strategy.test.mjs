@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => readFileSync(join(root, file), 'utf8').replace(/\r\n/g, '\n');
+const staleOpenAIReferences = /\b(?:gpt-)?5\.(?:1|2|5)\b|\b(?:thinking|instant)\b/i;
 
 test('OpenAI strategy targets the current GPT-5.6 family', () => {
   const strategy = read('strategies/openai.md');
@@ -15,8 +16,13 @@ test('OpenAI strategy targets the current GPT-5.6 family', () => {
   assert.match(strategy, /gpt-5\.6-terra/);
   assert.match(strategy, /gpt-5\.6-luna/);
   assert.match(strategy, /prompt-guidance-gpt-5p6/);
-  assert.doesNotMatch(strategy, /5\.1\s*\/\s*5\.2\s*\/\s*5\.5/);
-  assert.doesNotMatch(strategy, /\b(?:Thinking|Instant)\b/);
+  assert.doesNotMatch(strategy, staleOpenAIReferences);
+});
+
+test('stale OpenAI reference detector catches individual versions and mode labels', () => {
+  for (const stale of ['GPT-5.1', 'gpt-5.2', 'GPT-5.5', 'thinking', 'INSTANT']) {
+    assert.match(stale, staleOpenAIReferences);
+  }
 });
 
 test('OpenAI strategy keeps prompts lean without deleting measured requirements', () => {
