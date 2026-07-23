@@ -17,8 +17,8 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
 1. **Lead with the outcome.** State the goal, useful context, success criteria, required
    evidence, hard constraints, and output contract; delimit pasted content. Add process only
    when it matters.
-2. **Protect invariants.** Preserve explicit user values and use `MUST` / `NEVER` only for
-   real rules such as safety or format contracts; for judgment calls, give decision criteria.
+2. **Protect invariants.** Preserve explicit user values. Reserve `MUST` / `NEVER` for safety
+   or format contracts; for judgment calls, give decision criteria.
 3. **Set authorization once.** For answer, explain, review, diagnose, or plan, inspect and
    report only. For change, build, or fix, make in-scope local changes and run non-destructive
    validation. Require confirmation for external writes, destructive actions, purchases, or
@@ -30,9 +30,9 @@ fix a measured gap. Do not inject "think step by step"; use a surfaced reasoning
    implementation, or review. Follow repo patterns; run the smallest relevant repro, tests,
    lint, or build. For visual deliverables, render and inspect output. Put durable rules in
    `AGENTS.md`; request a plan only when the approach matters.
-6. **Ground retrieval.** Bound sources, dates, and the stop condition. Cite only retrieved
-   support; label inference, assumptions, source conflicts, and missing evidence. Never
-   fabricate citations or turn absence into a confident "no".
+6. **Ground retrieval.** Bound sources and the stop condition; bound dates when relevant.
+   Cite only retrieved support; label inference, assumptions, source conflicts, and missing
+   evidence. Never fabricate citations or turn absence into a confident "no".
 7. **Route tools.** Expose only relevant tools; resolve prerequisites; parallelize independent
    reads and sequence dependent calls. For empty or partial results, set a task-level retry or
    fallback limit and stop condition; report the gap when exhausted.

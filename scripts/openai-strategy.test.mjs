@@ -23,6 +23,8 @@ const hasAuditedLeanCopy = (value) => {
     )
   );
 };
+const hasGroundedCitationRule = (value) =>
+  /(?:^|[.!?]\s+)Cite only retrieved support[.;]/.test(normalizeMarkdown(value));
 const externalReadConfirmation =
   /\brequire confirmation for external (?:reads?|search(?:es)?|retrieval)\b|\bexternal (?:reads?|search(?:es)?|retrieval)\s+requires? confirmation\b/i;
 
@@ -133,8 +135,10 @@ test('OpenAI strategy routes tools by dependency and bounded fallback', () => {
 test('OpenAI strategy bounds retrieval and distinguishes evidence from inference', () => {
   const strategy = normalizeMarkdown(read('strategies/openai.md'));
 
-  assert.match(strategy, /bound sources, dates, and (?:the )?stop condition/i);
-  assert.match(strategy, /cite only retrieved support/i);
+  assert.match(strategy, /bound sources and (?:the )?stop condition; bound dates when relevant/i);
+  assert.equal(hasGroundedCitationRule(strategy), true);
+  assert.equal(hasGroundedCitationRule('Cite only retrieved support; label inference.'), true);
+  assert.equal(hasGroundedCitationRule('Do not cite only retrieved support.'), false);
   assert.match(strategy, /label inference, assumptions, source conflicts, and missing evidence/i);
   assert.match(strategy, /absence.{0,60}(?:confident )?["']no["']/i);
 });
